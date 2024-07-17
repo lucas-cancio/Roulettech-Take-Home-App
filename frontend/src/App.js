@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import api from './services/axios';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [myText, setMyText] = useState("");
+
+    const handleBtnClick = (event) => {
+        event.preventDefault();
+
+        api.get("/dummyApp/")
+        .then((res) => {
+            setMyText(res.data);
+        })
+        .catch((err) => {
+            console.error(err);
+            setMyText(err);
+        });
+    };
+
+    return (
+        <div className="App">
+            Hello, world!
+
+            <div>
+                <button onClick={handleBtnClick}>Update text from server</button>
+                <p>Django text:</p>
+                {myText}
+            </div>
+        </div>
+    );
 }
 
 export default App;
