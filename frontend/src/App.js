@@ -43,6 +43,7 @@ function App() {
                                 <h4>{recipe.name}</h4>
                                 <p><strong>Cuisine:</strong> {recipe.cuisine} </p>
                                 <p>{recipe.summary}</p>
+                                <img src={recipe.image} alt={recipe.name} />
                             </li>
                         ))}
                     </ul>
