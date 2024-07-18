@@ -18,12 +18,21 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.views.static import serve
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ExemptedMediaView(serve):
+    pass
 
 urlpatterns = [
     path('api/', include('recipes.urls')),
     path('dummyApp/', include('dummyApp.urls')),
     path('admin/', admin.site.urls),
+    re_path(r'^media/(?P<path>.*)$', ExemptedMediaView.as_view(), {'document_root': settings.MEDIA_ROOT}),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
