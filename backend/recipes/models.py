@@ -8,6 +8,7 @@ class Recipe(models.Model):
     rating = models.FloatField()
     instructions = models.TextField(max_length=500)
     summary = models.TextField(max_length=200)
+    image = models.ImageField(null=True)
 
 
     def __str__(self):
