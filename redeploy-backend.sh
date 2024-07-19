@@ -6,7 +6,7 @@ python3.12 -m pip install -r requirements.txt
 
 cd backend/
 python manage.py migrate
-python manage.py collectstatic
+python manage.py collectstatic --no-input
 cd /home/ec2-user/Roulettech-Take-Home-App
 
 # Set appropriate permissions for repo
