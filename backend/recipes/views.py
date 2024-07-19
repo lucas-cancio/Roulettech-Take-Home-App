@@ -4,23 +4,35 @@ from .serializers import RecipeSerializer
 from django.http import Http404
 from rest_framework.response import Response
 from django.db.models import Q
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 class RecipeListAPIView(generics.ListCreateAPIView):
     serializer_class = RecipeSerializer
 
     def get_queryset(self):
+        print("HALAMANA")
         queryset = Recipe.objects.all()
 
         keywords = self.request.query_params.get('keywords')
         ingredients = self.request.query_params.get('ingredients')
         max_cook_time = self.request.query_params.get('max_cook_time')
         min_rating = self.request.query_params.get('min_rating')
-        cuisines = self.request.query_params.get('cuisines')
+        cuisine = self.request.query_params.get('cuisine')
+
+        print(f"Keywords: '{keywords}'")
+        print(f"Ingredients: {ingredients}")
+        print(f"Max Cook Time: {max_cook_time}")
+        print(f"Min Rating: {min_rating}")
+        print(f"Cuisine: {cuisine}")
 
         # Search recipes that have at least one key word in the dish name, instructions, or summary.
         if keywords:
-            keyword_list = [keyword.strip() for keyword in keywords.split(',')]
+            keyword_list = [keyword.strip()  for keyword in keywords.split(',') if keyword != '']
+            print("Keyword List: " + str(keyword_list))
             keyword_query = Q()
             for keyword in keyword_list:
                 keyword_query |= Q(name__icontains=keyword)
@@ -41,11 +53,15 @@ class RecipeListAPIView(generics.ListCreateAPIView):
         
         # Search recipes with a rating above a specified minimum
         if min_rating:
-            queryset = queryset.filter(rating__gte=min_rating)
-        
-        # Search recipes that match one of the specified cuisines
-        if cuisines:
-            queryset = queryset.filter(cuisine__in=cuisines)
+            try:
+                min_rating = float(min_rating)
+                queryset = queryset.filter(rating__gte=min_rating)
+            except ValueError:
+                raise Http404
+
+        # Search recipes that match the specified cuisines
+        if cuisine:
+            queryset = queryset.filter(cuisine=cuisine)
 
         return queryset
     
@@ -65,4 +81,10 @@ class RecipeDetailAPIView(views.APIView):
     def get(self, request, pk):
         recipe = self.get_object(pk)
         serializer = RecipeSerializer(recipe)
-        return Response(serializer.data)
+
+        # Convert relative image URL to absolute URL
+        data = serializer.data
+        if 'image' in data:
+            data['image'] = request.build_absolute_uri(data['image'])
+
+        return Response(data)

@@ -1,0 +1,40 @@
+.recipe-container {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.upper-section {
+    background-color: beige;
+}
+
+.lower-section {
+    width: 100%;
+    background-color: white;
+}
+
+
+
+.recipe-image {
+    width: 200px;
+    height: 200px;
+}
+
+.recipe-title {
+    margin: 0px;
+}
+
+.recipe-rating {
+    margin: 0px;
+    padding-right: 5px;
+}
+
+.recipe-cook-time {
+    margin: 0px;
+}
+
+
+.rating-star-icon {
+    color: orange;
+}

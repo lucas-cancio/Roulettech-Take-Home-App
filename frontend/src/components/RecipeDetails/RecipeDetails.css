@@ -1,0 +1,29 @@
+.recipe-instruction-text {
+    text-wrap:balance;
+    text-overflow: clip;
+}
+
+/* Styles for screens with a minimum width of 5px */
+@media (min-width: 5px) {
+    .recipe-image {
+        width: 240px;
+        height: auto;
+    }
+   
+}
+
+/* Styles for screens with a maximum width of 600px */
+@media (min-width: 700px) {
+    .recipe-image {
+        width: 300px;
+        height: auto;
+    }
+}
+
+/* Styles for screens with a maximum width of 900 */
+@media (min-width: 900px) {
+    .recipe-image {
+        width: 400px;
+        height: auto;
+    }
+}
