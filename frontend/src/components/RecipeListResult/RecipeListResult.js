@@ -6,7 +6,7 @@ const RecipeListResult = ({recipes}) => {
 
     return (
         <div className='d-flex flex-column justify-content-start mt-4'>
-            <h2 className='text-center my-4'>Recipes Found:</h2>
+            <h2 className='text-center my-4'>Recipes Found</h2>
             <div className='d-flex flex-row justify-content-center flex-wrap'>
                     {
                     recipes ?
