@@ -1,0 +1,34 @@
+.recipe-creator-banner {
+    background: linear-gradient(to right, rgb(236, 95, 0), orange);
+    width: 100%;
+}
+
+.creator-container {
+    background-color: white;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px; 
+}
+
+.text-area-container {
+    width: 90%;
+}
+
+.recipe-creator-input {
+    border: none;
+    padding: 5px 5px 5px 5px;
+    background: linear-gradient(to right, rgb(236, 236, 236), rgb(228, 228, 228));
+}
+
+.creator-submit-btn {
+    background: linear-gradient(to right, rgb(236, 95, 0), orange);
+    font-size: x-large;
+    border-style: none;
+    padding: 10px 20px;
+}
+
+.imageValidationMsg {
+    color: red;
+}

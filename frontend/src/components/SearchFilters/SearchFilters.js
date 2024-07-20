@@ -43,9 +43,12 @@ const SearchFilters = ({handleFetchRecipes}) => {
 
     const handleAddIngredient = (event) => {
         event.preventDefault();
-        setIngredients([...ingredients, curIngredient]);
-        setCurIngredient('');
-        console.log("ingredients" + ingredients);
+
+        if (curIngredient !== "") {
+            setIngredients([...ingredients, curIngredient]);
+            setCurIngredient('');
+            console.log("ingredients" + ingredients);
+        };
     };
 
     const handleRemoveIngredient = (ingredientName) => {
@@ -129,10 +132,6 @@ const SearchFilters = ({handleFetchRecipes}) => {
                         ) : (
                             <> </>
                         )}
-                        {/* <div className='d-flex flex-column p-2'>
-                            <div className='d-flex flex-row flex-wrap'>
-                            </div>
-                        </div> */}
                     </div>
                     <div className='d-flex flex-row justify-content-center mt-3'>
                         <input type='button' value="Apply" onClick={handleApplyFilters}></input>

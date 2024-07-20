@@ -1,10 +1,11 @@
 import Layout from "../components/layout/Layout";
+import RecipeCreator from "../components/RecipeCreator/RecipeCreator";
 
 const RecipeCreatorPage = () => {
     return (
         <Layout>
             <div className="pt-5 mt-5">
-                <h1>Create a Recipe</h1>
+                <RecipeCreator />
             </div>
         </Layout>
     );
