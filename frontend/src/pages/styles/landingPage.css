@@ -1,0 +1,41 @@
+.site-title {
+    color: orange;
+}
+
+.sampleImage1 {
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.colored-text {
+    color: orange;
+}
+
+
+/* Small devices (tablets, 4009x and up) */
+@media (min-width: 0px) {
+    .sampleImage {
+        width: 200px;
+        height: 200px;
+        padding-bottom: 12px;
+    }
+}
+  
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .sampleImage {
+        width: 320px;
+        height: 320px;
+        overflow: hidden;
+    }
+}
+  
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .sampleImage {
+        width: 400px;
+        height: 400px;
+        overflow: hidden;
+    }
+}
