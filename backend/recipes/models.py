@@ -5,7 +5,7 @@ class Recipe(models.Model):
     cuisine = models.CharField(max_length=50)
     ingredients = models.TextField(help_text="A comma-separated list of ingredients")
     cook_time = models.IntegerField(help_text="Expected time in minutes to complete the recipe")
-    rating = models.FloatField()
+    rating = models.FloatField(default=0)
     instructions = models.TextField(max_length=500)
     summary = models.TextField(max_length=200)
     image = models.ImageField(null=True)
