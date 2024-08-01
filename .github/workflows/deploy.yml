@@ -20,7 +20,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t my-react-app .
+      run: docker build -t my-react-app -f frontend/Dockerfile .
 
     - name: Run Docker container and copy build files
       run: |
