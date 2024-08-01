@@ -36,5 +36,5 @@ jobs:
         aws-region: us-east-1  # specify your AWS region
 
     - name: Deploy to S3
-      run: aws s3 sync build/ ${{secrets.S3_BUCKET_URL}} --delete
+      run: aws s3 sync build/ ${{secrets.S3_BUCKET_NAME}} --delete
       #s3://your-s3-bucket-name
