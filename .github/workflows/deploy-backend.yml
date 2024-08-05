@@ -46,7 +46,8 @@ jobs:
       run: |
         echo "${EC2_SSH_PRIVATE_KEY}" > private_key.pem
         chmod 600 private_key.pem
-        ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_SSH_USERNAME@$EC2_SSH_HOST << 'EOF   
+        ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_SSH_USERNAME@$EC2_SSH_HOST << 'EOF 
+          cd backend/  
           echo "DEBUG=False" > .env
           echo "DJANGO_JWT_SECRET_KEY=django-insecure-+$gbz!$%&vy^qk3$zrq08r(gg1%uf3ghsm2)q0j20ftk!yf-$!" >> .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
@@ -57,7 +58,6 @@ jobs:
           echo "DB_ENGINE=django.db.backends.postgresql" >> .env
 
           docker pull ${{ secrets.DOCKER_USERNAME }}/recipe-django-app:latest
-          cd /backend/
           docker-compose down
           docker-compose up -d
         EOF
