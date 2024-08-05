@@ -17,6 +17,8 @@ services:
     command: cd backend && gunicorn backend.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/app
+      - static_volume:/app/backend/static  # Mount for static files
+      - media_volume:/app/backend/media  # Mount for media files
     ports:
       - "8000:8000"
     depends_on:
@@ -30,6 +32,8 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/app/static  
+      - media_volume:/app/media  
     ports:
       - "80:80"
     depends_on:
@@ -37,3 +41,5 @@ services:
 
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:
