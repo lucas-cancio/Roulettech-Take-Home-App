@@ -30,9 +30,8 @@ jobs:
 
           # Install Docker
           if ! [ -x "$(command -v docker)" ]; then
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          sh get-docker.sh
-          sudo usermod -aG docker $USER
+          sudo dnf update
+          sudo dnf install docker
           fi
 
           # Install Docker Compose
@@ -45,6 +44,8 @@ jobs:
           if [ ! -d "Roulettech-Take-Home-App" ]; then
             git clone https://github.com/lucas-cancio/Roulettech-Take-Home-App.git
           fi
+
+          cd Roulettech-Take-Home-App
 
           # Pull the latest changes
           git fetch
@@ -63,7 +64,7 @@ jobs:
 
           # Pull the latest Docker image and run Docker Compose
           docker-compose down
-          docker compose build
+          docker-compose build
           docker-compose up -d
         EOF
 
