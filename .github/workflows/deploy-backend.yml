@@ -17,26 +17,6 @@ jobs:
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
-
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Build Docker image for backend
-      run: docker build -t recipe-django-app:backend -f backend/Dockerfile .
-
-    - name: Push Docker image to Docker Hub
-      run: docker push recipe-django-app:backend
-
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/recipe-django-app:latest
-
     
     - name: Deploy to EC2
       env:
@@ -47,6 +27,30 @@ jobs:
         echo "${EC2_SSH_PRIVATE_KEY}" > private_key.pem
         chmod 600 private_key.pem
         ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_SSH_USERNAME@$EC2_SSH_HOST << 'EOF 
+
+          # Install Docker
+          if ! [ -x "$(command -v docker)" ]; then
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          sh get-docker.sh
+          sudo usermod -aG docker $USER
+          fi
+
+          # Install Docker Compose
+          if ! [ -x "$(command -v docker-compose)" ]; then
+          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          fi
+
+          # Clone the repository
+          if [ ! -d "Roulettech-Take-Home-App" ]; then
+            git clone https://github.com/lucas-cancio/Roulettech-Take-Home-App.git
+          fi
+
+          # Pull the latest changes
+          git fetch
+          git reset origin/main --hard
+
+          # Create .env file with necessary environment variables
           cd backend/  
           echo "DEBUG=False" > .env
           echo "DJANGO_JWT_SECRET_KEY=django-insecure-+$gbz!$%&vy^qk3$zrq08r(gg1%uf3ghsm2)q0j20ftk!yf-$!" >> .env
@@ -57,7 +61,10 @@ jobs:
           echo "DB_PORT=5432" >> .env
           echo "DB_ENGINE=django.db.backends.postgresql" >> .env
 
-          docker pull ${{ secrets.DOCKER_USERNAME }}/recipe-django-app:latest
+          # Pull the latest Docker image and run Docker Compose
           docker-compose down
+          docker compose build
           docker-compose up -d
         EOF
+
+        rm private_key.pem
