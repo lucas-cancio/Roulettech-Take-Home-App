@@ -3,7 +3,7 @@ FROM python:3.12-slim
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y libxcrypt libxcrypt-compat
-RUN 
+RUN sudo ln -s /usr/lib/libcrypt.so.2.0.0 /usr/lib/libcrypt.so.1
 
 # Set work directory
 WORKDIR /app
