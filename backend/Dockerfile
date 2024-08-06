@@ -18,6 +18,7 @@ WORKDIR /app/backend
 # Make migrations and collect static files
 RUN pwd
 RUN ls -la
+RUN cat .env
 RUN python manage.py migrate && python manage.py collectstatic --no-input
 
 # Set correct file and ownership to enable access
