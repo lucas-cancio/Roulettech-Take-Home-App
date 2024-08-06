@@ -70,10 +70,7 @@ jobs:
 
           # Copy requirements.txt file into backend/ directory
           cp requirements.txt backend/requirements.txt
-          
-          # Add appropriate permissions to wait-for-it script
-          chmod +x wait-for-it.sh
-          
+
           # Create .env file with necessary environment variables
           cd backend/  
           echo "DEBUG=False" > .env
@@ -85,6 +82,8 @@ jobs:
           echo "DB_PORT=5432" >> .env
           echo "DB_ENGINE=django.db.backends.postgresql" >> .env
 
+          # Add appropriate permissions to wait-for-it script
+          chmod +x wait-for-it.sh
 
           # Pull the latest Docker image and run Docker Compose
           docker-compose down

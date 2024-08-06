@@ -10,7 +10,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the wait-for-it script
-COPY ./wait-for-it.sh /wait-for-it.sh
+COPY wait-for-it.sh /app/
 RUN ls -la ../
 RUN ls -la 
 
@@ -23,7 +23,7 @@ WORKDIR /app/backend
 # Make migrations and collect static files
 RUN pwd
 RUN ls -la
-RUN /wait-for-it.sh db:5432 --python manage.py migrate && python manage.py collectstatic --no-input
+RUN /app/wait-for-it.sh db:5432 --python manage.py migrate && python manage.py collectstatic --no-input
 
 # Set correct file and ownership to enable access
 RUN sudo chown -R ec2-user:nginx ./ && chmod -R 770 ./
