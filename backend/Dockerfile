@@ -15,9 +15,10 @@ RUN pip install -r requirements.txt
 #RUN ls -la 
 
 # Copy entrypoint script
-COPY django-entrypoint.sh /app/backend/
-RUN sed -i 's/\r$//g' /app/backend/django-entrypoint.sh
-RUN chmod +x /app/backend/django-entrypoint.sh
+COPY django-entrypoint.sh /app/
+RUN sed -i 's/\r$//g' /app/django-entrypoint.sh
+RUN chmod +x /app/django-entrypoint.sh
+RUN ls -la
 
 # Copy the rest of the django application code
 COPY ./ /app/backend/
@@ -25,7 +26,7 @@ COPY ./ /app/backend/
 # Set the working directory to the Django backend
 WORKDIR /app/backend
 
-ENTRYPOINT [ "/app/backend/django-entrypoint.sh" ]
+ENTRYPOINT [ "/app/django-entrypoint.sh" ]
 
 
 # Make migrations and collect static files
