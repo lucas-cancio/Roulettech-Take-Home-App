@@ -24,7 +24,6 @@ RUN ls -la
 COPY ./ /app/backend/
 
 # Set the working directory to the Django backend
-WORKDIR /app/backend
 
 ENTRYPOINT [ "/app/django-entrypoint.sh" ]
 
