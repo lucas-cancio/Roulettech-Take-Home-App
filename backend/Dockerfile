@@ -12,8 +12,11 @@ RUN pip install -r requirements.txt
 # Copy the rest of the django application code
 COPY backend/ ./backend/
 
+# Set the working directory to the Django backend
+WORKDIR /app/backend
+
 # Make migrations and collect static files
-RUN cd backend/ && python manage.py migrate && python manage.py collectstatic --no-input
+RUN python manage.py migrate && python manage.py collectstatic --no-input
 
 # Set correct file and ownership to enable access
 RUN sudo chown -R ec2-user:nginx ./ && chmod -R 770 ./
