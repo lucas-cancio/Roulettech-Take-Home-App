@@ -10,8 +10,9 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the wait-for-it script
-RUN ls -la ../
 COPY ../wait-for-it.sh /wait-for-it.sh
+RUN ls -la ../
+RUN ls -la 
 
 # Copy the rest of the django application code
 COPY ./ /app/backend/
