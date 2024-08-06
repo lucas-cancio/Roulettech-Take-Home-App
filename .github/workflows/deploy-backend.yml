@@ -91,7 +91,7 @@ jobs:
 
           # Pull the latest Docker image and run Docker Compose
           docker-compose down
-          docker-compuse build
+          docker-compose build
           docker-compose up -d
         EOF
 
