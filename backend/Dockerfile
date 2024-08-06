@@ -16,6 +16,7 @@ COPY backend/ /app/backend/
 WORKDIR /app/backend
 
 # Make migrations and collect static files
+RUN ls -la
 RUN python manage.py migrate && python manage.py collectstatic --no-input
 
 # Set correct file and ownership to enable access
