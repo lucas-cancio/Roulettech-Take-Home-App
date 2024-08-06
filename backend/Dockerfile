@@ -10,7 +10,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the rest of the django application code
-COPY backend/ /app/
+COPY backend/ /app/backend/
 
 # Set the working directory to the Django backend
 WORKDIR /app/backend
