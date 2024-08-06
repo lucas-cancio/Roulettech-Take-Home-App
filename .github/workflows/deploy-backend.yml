@@ -81,6 +81,7 @@ jobs:
           echo "DB_HOST=db" >> .env
           echo "DB_PORT=5432" >> .env
           echo "DB_ENGINE=django.db.backends.postgresql" >> .env
+          echo "DATABASE=postgres" >> .env
 
           # Add appropriate permissions to for scripts
           sudo chmod +x wait-for-it.sh
@@ -88,7 +89,6 @@ jobs:
 
           # Pull the latest Docker image and run Docker Compose
           docker-compose down
-          docker-compose build
           docker-compose up -d
         EOF
 
