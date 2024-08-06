@@ -10,7 +10,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the wait-for-it script
-COPY ../wait-for-it.sh /wait-for-it.sh
+COPY ./wait-for-it.sh /wait-for-it.sh
 RUN ls -la ../
 RUN ls -la 
 
