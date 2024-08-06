@@ -9,6 +9,9 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+# Copy the wait-for-it script
+COPY ../wait-for-it.sh /wait-for-it.sh
+
 # Copy the rest of the django application code
 COPY ./ /app/backend/
 
@@ -18,8 +21,7 @@ WORKDIR /app/backend
 # Make migrations and collect static files
 RUN pwd
 RUN ls -la
-RUN cat .env
-RUN python manage.py migrate && python manage.py collectstatic --no-input
+RUN /wait-for-it.sh db:5432 --python manage.py migrate && python manage.py collectstatic --no-input
 
 # Set correct file and ownership to enable access
 RUN sudo chown -R ec2-user:nginx ./ && chmod -R 770 ./
