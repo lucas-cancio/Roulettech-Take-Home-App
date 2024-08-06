@@ -17,7 +17,7 @@ RUN pip install -r requirements.txt
 # Copy entrypoint script
 COPY django-entrypoint.sh /app/backend/
 RUN sed -i 's/\r$//g' /app/backend/django-entrypoint.sh
-RUN chmod +x django-entrypoint.sh
+RUN chmod +x /app/backend/django-entrypoint.sh
 
 # Copy the rest of the django application code
 COPY ./ /app/backend/
