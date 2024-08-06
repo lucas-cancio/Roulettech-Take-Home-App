@@ -23,7 +23,7 @@ WORKDIR /app/backend
 # Make migrations and collect static files
 RUN pwd
 RUN ls -la
-RUN /app/wait-for-it.sh db:5432 --python manage.py migrate && python manage.py collectstatic --no-input
+RUN /app/wait-for-it.sh db:5432 -- python manage.py migrate && python manage.py collectstatic --no-input
 
 # Set correct file and ownership to enable access
 RUN sudo chown -R ec2-user:nginx ./ && chmod -R 770 ./
