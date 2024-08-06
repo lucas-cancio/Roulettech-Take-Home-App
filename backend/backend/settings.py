@@ -20,7 +20,7 @@ from django.core.management.utils import get_random_secret_key
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load .env from just outside the django project
-load_dotenv(os.path.join(BASE_DIR, '../.env'))
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
