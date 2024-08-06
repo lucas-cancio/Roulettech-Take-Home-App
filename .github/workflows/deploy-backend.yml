@@ -68,6 +68,9 @@ jobs:
           git fetch
           git reset origin/main --hard
 
+          # Copy requirements.txt file into backend/ directory
+          cp requirements.txt backend/requirements.txt
+
           # Create .env file with necessary environment variables
           cd backend/  
           echo "DEBUG=False" > .env
