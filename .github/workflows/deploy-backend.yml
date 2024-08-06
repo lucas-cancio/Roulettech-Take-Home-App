@@ -32,6 +32,23 @@ jobs:
           if ! [ -x "$(command -v docker)" ]; then
           sudo dnf update
           sudo dnf install docker
+          sudo usermod -aG docker $USER
+          fi
+
+          # Start docker service and add user to docker group
+          sudo systemctl start docker
+          sudo systemctl enable docker
+          
+          # Check Docker service status
+          if ! sudo systemctl is-active --quiet docker; then
+          echo "Docker service is not running"
+          exit 1
+          fi
+
+          # Check Docker socket
+          if [ ! -S /var/run/docker.sock ]; then
+          echo "Docker socket not found"
+          exit 1
           fi
 
           # Install Docker Compose
@@ -39,7 +56,7 @@ jobs:
           sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
           fi
-
+          
           # Clone the repository
           if [ ! -d "Roulettech-Take-Home-App" ]; then
             git clone https://github.com/lucas-cancio/Roulettech-Take-Home-App.git
