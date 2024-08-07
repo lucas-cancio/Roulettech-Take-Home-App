@@ -1,20 +1,18 @@
 #!/bin/sh
 
 # Install netcat
-# apt-get update && apt-get install -y nc && rm -rf /var/lib/apt/lists/*
+apt-get update && apt-get install -y netcat && rm -rf /var/lib/apt/lists/*
 
-echo "Waiting for postgres..."
-sleep 15
-# if [ "$DATABASE" = "postgres" ]
-# then
-#     echo "Waiting for postgres..."
+if [ "$DATABASE" = "postgres" ]
+then
+    echo "Waiting for postgres..."
 
-#     while ! nc -z $SQL_HOST $SQL_PORT; do
-#       sleep 0.1
-#     done
+    while ! nc -z $SQL_HOST $SQL_PORT; do
+      sleep 0.1
+    done
 
-#     echo "PostgreSQL started"
-# fi
+    echo "PostgreSQL started"
+fi
 
 echo $USER
 
