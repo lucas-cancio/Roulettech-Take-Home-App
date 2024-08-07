@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Install netcat
-RUN apt-get update && apt-get install -y nc #&& rm -rf /var/lib/apt/lists/*
+apt-get update && apt-get install -y nc && rm -rf /var/lib/apt/lists/*
 
 if [ "$DATABASE" = "postgres" ]
 then
