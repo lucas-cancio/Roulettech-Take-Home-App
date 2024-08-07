@@ -9,11 +9,6 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Copy the wait-for-it script
-#COPY wait-for-it.sh /app/
-#RUN ls -la ../
-#RUN ls -la 
-
 # Copy entrypoint script
 COPY django-entrypoint.sh /app/
 RUN sed -i 's/\r$//g' /app/django-entrypoint.sh

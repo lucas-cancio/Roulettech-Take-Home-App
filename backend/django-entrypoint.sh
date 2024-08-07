@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Install netcat
+RUN apt-get update && apt-get install -y netcat && rm -rf /var/lib/apt/lists/*
+
 if [ "$DATABASE" = "postgres" ]
 then
     echo "Waiting for postgres..."
@@ -10,6 +13,8 @@ then
 
     echo "PostgreSQL started"
 fi
+
+echo $USER
 
 #python manage.py flush --no-input
 python manage.py migrate
