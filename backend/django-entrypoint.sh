@@ -3,6 +3,8 @@
 # Install netcat
 # apt-get update && apt-get install -y nc && rm -rf /var/lib/apt/lists/*
 
+echo "Waiting for postgres..."
+sleep 10
 # if [ "$DATABASE" = "postgres" ]
 # then
 #     echo "Waiting for postgres..."
