@@ -22,7 +22,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t my-react-app -f frontend/DockerFile .
+      run: |
+        echo "DEBUG=False" > frontend/.env
+        echo "REACT_APP_BACKEND_URL=${{ secrets.BACKEND_URL }}" >> frontend/.env
+        docker build -t my-react-app -f frontend/DockerFile .
 
     - name: Run Docker container and copy build files
       run: |
