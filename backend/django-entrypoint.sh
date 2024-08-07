@@ -4,7 +4,7 @@
 # apt-get update && apt-get install -y nc && rm -rf /var/lib/apt/lists/*
 
 echo "Waiting for postgres..."
-sleep 10
+sleep 15
 # if [ "$DATABASE" = "postgres" ]
 # then
 #     echo "Waiting for postgres..."
@@ -23,4 +23,5 @@ python manage.py migrate
 python manage.py collectstatic --no-input
 #sudo chown -R ec2-user:nginx ./ && chmod -R 770 ./
 
+cd backend
 exec "$@"
